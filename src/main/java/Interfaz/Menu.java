@@ -35,7 +35,7 @@ public class Menu extends javax.swing.JFrame {
 
     private String panelActivo = "inicio";
 
-        @SuppressWarnings("this-escape")
+    @SuppressWarnings("this-escape")
     public Menu() {
         if (!java.beans.Beans.isDesignTime()) {
             setUndecorated(true);
@@ -304,16 +304,17 @@ public class Menu extends javax.swing.JFrame {
         lblResumenTitulo = new javax.swing.JLabel();
         panelResumenContadores = new javax.swing.JPanel();
         panelContadorClientes = new javax.swing.JPanel();
-        lblContadorClientesValor = new javax.swing.JLabel();
         lblContadorClientesNombre = new javax.swing.JLabel();
+        lblContadorClientesValor = new javax.swing.JLabel();
         lblContadorClientesDetalle = new javax.swing.JLabel();
+        lblContadorClientesValor1 = new javax.swing.JLabel();
         panelContadorEmpleados = new javax.swing.JPanel();
-        lblContadorEmpleadosValor = new javax.swing.JLabel();
         lblContadorEmpleadosNombre = new javax.swing.JLabel();
+        lblContadorEmpleadosValor = new javax.swing.JLabel();
         lblContadorEmpleadosDetalle = new javax.swing.JLabel();
         panelContadorComponentes = new javax.swing.JPanel();
-        lblContadorComponentesValor = new javax.swing.JLabel();
         lblContadorComponentesNombre = new javax.swing.JLabel();
+        lblContadorComponentesValor = new javax.swing.JLabel();
         lblContadorComponentesDetalle = new javax.swing.JLabel();
         cardClientes = new javax.swing.JPanel();
         lblClientesTitulo = new javax.swing.JLabel();
@@ -341,31 +342,21 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1.setBackground(java.awt.Color.gray);
         jLabel1.setFont(new java.awt.Font("Cooper Black", 3, 28)); // NOI18N
-        jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("ForgePCs");
 
-        btnInicio.setBackground(new java.awt.Color(86, 86, 86));
-        btnInicio.setForeground(java.awt.Color.white);
+        btnInicio.setForeground(new java.awt.Color(255, 255, 255));
         btnInicio.setText("Inicio");
         btnInicio.addActionListener(this::btnInicioActionPerformed);
 
-        btnClientes1.setBackground(new java.awt.Color(86, 86, 86));
-        btnClientes1.setForeground(java.awt.Color.white);
         btnClientes1.setText("Clientes");
         btnClientes1.addActionListener(this::btnClientes1ActionPerformed);
 
-        btnEmpleados.setBackground(new java.awt.Color(86, 86, 86));
-        btnEmpleados.setForeground(java.awt.Color.white);
         btnEmpleados.setText("Empleados");
         btnEmpleados.addActionListener(this::btnEmpleadosActionPerformed);
 
-        btnComponentes.setBackground(new java.awt.Color(86, 86, 86));
-        btnComponentes.setForeground(java.awt.Color.white);
         btnComponentes.setText("Componentes");
         btnComponentes.addActionListener(this::btnComponentesActionPerformed);
 
-        btnSalir.setBackground(new java.awt.Color(86, 86, 86));
-        btnSalir.setForeground(java.awt.Color.white);
         btnSalir.setText("Salir");
         btnSalir.addActionListener(this::btnSalirActionPerformed);
 
@@ -410,110 +401,90 @@ public class Menu extends javax.swing.JFrame {
         cardInicio.setBackground(new java.awt.Color(245, 245, 245));
 
         lblInicioTitulo.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
-        lblInicioTitulo.setForeground(new java.awt.Color(51, 51, 51));
         lblInicioTitulo.setText("ForgePCs");
 
         lblInicioSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblInicioSubtitulo.setForeground(new java.awt.Color(102, 102, 102));
         lblInicioSubtitulo.setText("Sistema de gestion");
 
-        lblInicioTexto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblInicioTexto.setForeground(new java.awt.Color(102, 102, 102));
         lblInicioTexto.setText("<html><div style='width:520px;'>Fabricacion de componentes y armado de computadoras personalizadas.</div></html>");
 
-        lblAccesosTitulo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblAccesosTitulo.setForeground(new java.awt.Color(51, 51, 51));
         lblAccesosTitulo.setText("Accesos rapidos");
 
-        panelAccesosRapidos.setBackground(new java.awt.Color(245, 245, 245));
-        panelAccesosRapidos.setLayout(new GridLayout(2, 2, 12, 12));
+        panelAccesosRapidos.setLayout(new java.awt.GridLayout(2, 2, 12, 12));
 
-        btnAccClientes.setBackground(new java.awt.Color(86, 86, 86));
-        btnAccClientes.setForeground(java.awt.Color.white);
         btnAccClientes.setText("Clientes");
         panelAccesosRapidos.add(btnAccClientes);
 
-        btnAccEmpleados.setBackground(new java.awt.Color(86, 86, 86));
-        btnAccEmpleados.setForeground(java.awt.Color.white);
         btnAccEmpleados.setText("Empleados");
         panelAccesosRapidos.add(btnAccEmpleados);
 
-        btnAccComponentes.setBackground(new java.awt.Color(86, 86, 86));
-        btnAccComponentes.setForeground(java.awt.Color.white);
         btnAccComponentes.setText("Componentes");
         panelAccesosRapidos.add(btnAccComponentes);
 
-        btnAccSalir.setBackground(new java.awt.Color(86, 86, 86));
-        btnAccSalir.setForeground(java.awt.Color.white);
         btnAccSalir.setText("Salir");
         panelAccesosRapidos.add(btnAccSalir);
 
-        lblResumenTitulo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblResumenTitulo.setForeground(new java.awt.Color(51, 51, 51));
         lblResumenTitulo.setText("Resumen del sistema");
 
-        panelResumenContadores.setBackground(new java.awt.Color(245, 245, 245));
-        panelResumenContadores.setLayout(new GridLayout(1, 3, 16, 0));
+        panelResumenContadores.setLayout(new java.awt.GridLayout(1, 3, 16, 0));
 
-        panelContadorClientes.setBackground(new java.awt.Color(232, 232, 232));
-        panelContadorClientes.setLayout(new BorderLayout());
+        panelContadorClientes.setLayout(new java.awt.BorderLayout());
 
+        lblContadorClientesNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorClientesNombre.setText("Clientes");
+        panelContadorClientes.add(lblContadorClientesNombre, java.awt.BorderLayout.NORTH);
+
+        lblContadorClientesValor.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblContadorClientesValor.setForeground(new java.awt.Color(51, 51, 51));
         lblContadorClientesValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblContadorClientesValor.setText("--");
-
-        lblContadorClientesNombre.setForeground(new java.awt.Color(51, 51, 51));
-        lblContadorClientesNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblContadorClientesNombre.setText("Clientes");
+        panelContadorClientes.add(lblContadorClientesValor, java.awt.BorderLayout.CENTER);
 
         lblContadorClientesDetalle.setForeground(new java.awt.Color(102, 102, 102));
         lblContadorClientesDetalle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblContadorClientesDetalle.setText("Registrados");
+        panelContadorClientes.add(lblContadorClientesDetalle, java.awt.BorderLayout.SOUTH);
 
-        panelContadorClientes.add(lblContadorClientesValor, BorderLayout.CENTER);
-        panelContadorClientes.add(lblContadorClientesNombre, BorderLayout.NORTH);
-        panelContadorClientes.add(lblContadorClientesDetalle, BorderLayout.SOUTH);
-
-        panelContadorEmpleados.setBackground(new java.awt.Color(232, 232, 232));
-        panelContadorEmpleados.setLayout(new BorderLayout());
-
-        lblContadorEmpleadosValor.setForeground(new java.awt.Color(51, 51, 51));
-        lblContadorEmpleadosValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblContadorEmpleadosValor.setText("--");
-
-        lblContadorEmpleadosNombre.setForeground(new java.awt.Color(51, 51, 51));
-        lblContadorEmpleadosNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblContadorEmpleadosNombre.setText("Empleados");
-
-        lblContadorEmpleadosDetalle.setForeground(new java.awt.Color(102, 102, 102));
-        lblContadorEmpleadosDetalle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblContadorEmpleadosDetalle.setText("Activos");
-
-        panelContadorEmpleados.add(lblContadorEmpleadosValor, BorderLayout.CENTER);
-        panelContadorEmpleados.add(lblContadorEmpleadosNombre, BorderLayout.NORTH);
-        panelContadorEmpleados.add(lblContadorEmpleadosDetalle, BorderLayout.SOUTH);
-
-        panelContadorComponentes.setBackground(new java.awt.Color(232, 232, 232));
-        panelContadorComponentes.setLayout(new BorderLayout());
-
-        lblContadorComponentesValor.setForeground(new java.awt.Color(51, 51, 51));
-        lblContadorComponentesValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblContadorComponentesValor.setText("--");
-
-        lblContadorComponentesNombre.setForeground(new java.awt.Color(51, 51, 51));
-        lblContadorComponentesNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblContadorComponentesNombre.setText("Componentes");
-
-        lblContadorComponentesDetalle.setForeground(new java.awt.Color(102, 102, 102));
-        lblContadorComponentesDetalle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblContadorComponentesDetalle.setText("En stock");
-
-        panelContadorComponentes.add(lblContadorComponentesValor, BorderLayout.CENTER);
-        panelContadorComponentes.add(lblContadorComponentesNombre, BorderLayout.NORTH);
-        panelContadorComponentes.add(lblContadorComponentesDetalle, BorderLayout.SOUTH);
+        lblContadorClientesValor1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lblContadorClientesValor1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorClientesValor1.setText("--");
+        panelContadorClientes.add(lblContadorClientesValor1, java.awt.BorderLayout.CENTER);
 
         panelResumenContadores.add(panelContadorClientes);
+
+        panelContadorEmpleados.setLayout(new java.awt.BorderLayout());
+
+        lblContadorEmpleadosNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorEmpleadosNombre.setText("Empleados");
+        panelContadorEmpleados.add(lblContadorEmpleadosNombre, java.awt.BorderLayout.PAGE_START);
+
+        lblContadorEmpleadosValor.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lblContadorEmpleadosValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorEmpleadosValor.setText("--");
+        panelContadorEmpleados.add(lblContadorEmpleadosValor, java.awt.BorderLayout.CENTER);
+
+        lblContadorEmpleadosDetalle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorEmpleadosDetalle.setText("Activos");
+        panelContadorEmpleados.add(lblContadorEmpleadosDetalle, java.awt.BorderLayout.PAGE_END);
+
         panelResumenContadores.add(panelContadorEmpleados);
+
+        panelContadorComponentes.setLayout(new java.awt.BorderLayout());
+
+        lblContadorComponentesNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorComponentesNombre.setText("Componentes");
+        panelContadorComponentes.add(lblContadorComponentesNombre, java.awt.BorderLayout.PAGE_START);
+
+        lblContadorComponentesValor.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lblContadorComponentesValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorComponentesValor.setText("--");
+        panelContadorComponentes.add(lblContadorComponentesValor, java.awt.BorderLayout.CENTER);
+
+        lblContadorComponentesDetalle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorComponentesDetalle.setText("En stock");
+        panelContadorComponentes.add(lblContadorComponentesDetalle, java.awt.BorderLayout.PAGE_END);
+
         panelResumenContadores.add(panelContadorComponentes);
 
         javax.swing.GroupLayout cardInicioLayout = new javax.swing.GroupLayout(cardInicio);
@@ -526,7 +497,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(lblInicioTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblInicioSubtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sepInicio)
-                    .addComponent(lblInicioTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblInicioTexto, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
                     .addComponent(lblAccesosTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelAccesosRapidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblResumenTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -543,7 +514,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(sepInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblInicioTexto)
+                .addComponent(lblInicioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(lblAccesosTitulo)
                 .addGap(12, 12, 12)
@@ -559,22 +530,7 @@ public class Menu extends javax.swing.JFrame {
 
         cardClientes.setBackground(new java.awt.Color(245, 245, 245));
 
-        lblClientesTitulo.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
-        lblClientesTitulo.setForeground(new java.awt.Color(51, 51, 51));
         lblClientesTitulo.setText("Clientes");
-
-        lblClientesSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblClientesSubtitulo.setForeground(new java.awt.Color(102, 102, 102));
-        lblClientesSubtitulo.setText("Administracion de clientes");
-
-        lblClientesTexto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblClientesTexto.setForeground(new java.awt.Color(102, 102, 102));
-        lblClientesTexto.setText("<html><div style='width:520px;'>"
-                + "Gestione el registro de clientes que solicitan PCs personalizadas.<br><br>"
-                + "<b>Funciones del TP:</b><br>"
-                + "&#8226; Dar de alta clientes<br>"
-                + "&#8226; Listar clientes ordenados por apellido"
-                + "</div></html>");
 
         javax.swing.GroupLayout cardClientesLayout = new javax.swing.GroupLayout(cardClientes);
         cardClientes.setLayout(cardClientesLayout);
@@ -583,7 +539,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(cardClientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cardClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblClientesTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblClientesTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
                     .addComponent(lblClientesSubtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sepClientes)
                     .addComponent(lblClientesTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -607,22 +563,7 @@ public class Menu extends javax.swing.JFrame {
 
         cardEmpleados.setBackground(new java.awt.Color(245, 245, 245));
 
-        lblEmpleadosTitulo.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
-        lblEmpleadosTitulo.setForeground(new java.awt.Color(51, 51, 51));
         lblEmpleadosTitulo.setText("Empleados");
-
-        lblEmpleadosSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblEmpleadosSubtitulo.setForeground(new java.awt.Color(102, 102, 102));
-        lblEmpleadosSubtitulo.setText("Personal de ForgePCs");
-
-        lblEmpleadosTexto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblEmpleadosTexto.setForeground(new java.awt.Color(102, 102, 102));
-        lblEmpleadosTexto.setText("<html><div style='width:520px;'>"
-                + "Administre administradores, gerentes y operarios del taller.<br><br>"
-                + "<b>Funciones del TP:</b><br>"
-                + "&#8226; Dar de alta personal<br>"
-                + "&#8226; Listar todos los empleados"
-                + "</div></html>");
 
         javax.swing.GroupLayout cardEmpleadosLayout = new javax.swing.GroupLayout(cardEmpleados);
         cardEmpleados.setLayout(cardEmpleadosLayout);
@@ -631,7 +572,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(cardEmpleadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cardEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEmpleadosTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEmpleadosTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
                     .addComponent(lblEmpleadosSubtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sepEmpleados)
                     .addComponent(lblEmpleadosTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -655,25 +596,7 @@ public class Menu extends javax.swing.JFrame {
 
         cardComponentes.setBackground(new java.awt.Color(245, 245, 245));
 
-        lblComponentesTitulo.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
-        lblComponentesTitulo.setForeground(new java.awt.Color(51, 51, 51));
         lblComponentesTitulo.setText("Componentes");
-
-        lblComponentesSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblComponentesSubtitulo.setForeground(new java.awt.Color(102, 102, 102));
-        lblComponentesSubtitulo.setText("Inventario de hardware");
-
-        lblComponentesTexto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblComponentesTexto.setForeground(new java.awt.Color(102, 102, 102));
-        lblComponentesTexto.setText("<html><div style='width:520px;'>"
-                + "Gestione placas, procesadores, memoria, discos, fuentes y mas.<br><br>"
-                + "<b>Funciones del TP:</b><br>"
-                + "&#8226; Dar de alta componentes<br>"
-                + "&#8226; Eliminar componente por id<br>"
-                + "&#8226; Mostrar componentes<br>"
-                + "&#8226; Construir PC<br>"
-                + "&#8226; Listar PCs construidas"
-                + "</div></html>");
 
         javax.swing.GroupLayout cardComponentesLayout = new javax.swing.GroupLayout(cardComponentes);
         cardComponentes.setLayout(cardComponentesLayout);
@@ -682,7 +605,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(cardComponentesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cardComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblComponentesTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblComponentesTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
                     .addComponent(lblComponentesSubtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sepComponentes)
                     .addComponent(lblComponentesTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -766,6 +689,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel lblContadorClientesDetalle;
     private javax.swing.JLabel lblContadorClientesNombre;
     private javax.swing.JLabel lblContadorClientesValor;
+    private javax.swing.JLabel lblContadorClientesValor1;
     private javax.swing.JLabel lblContadorComponentesDetalle;
     private javax.swing.JLabel lblContadorComponentesNombre;
     private javax.swing.JLabel lblContadorComponentesValor;
