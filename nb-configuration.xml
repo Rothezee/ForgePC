@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-shared-configuration>
+    <config-data xmlns="http://www.netbeans.org/ns/maven-config-data/1">
+        <configurations>
+            <configuration id="default" runConfigName="ForgePCs">
+                <execArgs></execArgs>
+                <execClassName>Interfaz.Main</execClassName>
+                <execWorkingDir>${project.basedir}</execWorkingDir>
+            </configuration>
+        </configurations>
+    </config-data>
+</project-shared-configuration>

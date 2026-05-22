@@ -1,1 +1,13 @@
-/target/
+target/
+nbproject/private/
+build/
+bin/
+*.class
+*.jar
+*.war
+*.ear
+.idea/
+*.iml
+.vscode/
+!/.vscode/launch.json
+!/.vscode/settings.json
