@@ -1,0 +1,6 @@
+ADMIN;1;Carlos;Ruiz;25111222;10/05/1985;Belgrano 100;8;1001;Facturacion;Administracion
+ADMIN;2;Laura;Diaz;26222333;22/08/1990;Mitre 200;5;1002;RRHH;Recursos Humanos
+OPER;3;Pedro;Sosa;27333444;03/12/1988;Rivadavia 300;10;2001;Produccion
+OPER;4;Sofia;Mena;28444555;18/02/1992;Sarmiento 400;4;2002;Calidad
+GEREN;5;Jorge;Perez;29555666;25/09/1980;Colon 500;15;3001;Gerente General
+GEREN;6;Elena;Vega;30666777;14/06/1983;Independencia 600;12;3002;Gerente Produccion
