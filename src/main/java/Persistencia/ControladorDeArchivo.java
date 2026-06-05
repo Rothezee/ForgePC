@@ -4,11 +4,9 @@ import excepciones.PersistenciaException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class ControladorDeArchivo {
             return new ArrayList<>();
         }
         List<String> lineas = new ArrayList<>();
-        try (BufferedReader lector = Files.newBufferedReader(archivo.toPath(), StandardCharsets.UTF_8)) {
+        try (BufferedReader lector = new BufferedReader(new FileReader(archivo))) {
             String linea;
             while ((linea = lector.readLine()) != null) {
                 if (!linea.trim().isEmpty()) {
@@ -58,8 +56,7 @@ public class ControladorDeArchivo {
         if (padre != null && !padre.exists() && !padre.mkdirs()) {
             throw new PersistenciaException("No se pudo crear la carpeta: " + padre.getPath());
         }
-        try (BufferedWriter escritor = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(archivo, false), StandardCharsets.UTF_8))) {
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(archivo))) {
             for (String linea : lineas) {
                 escritor.write(linea);
                 escritor.newLine();
