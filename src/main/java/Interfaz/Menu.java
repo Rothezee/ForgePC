@@ -136,25 +136,33 @@ public class Menu extends javax.swing.JFrame {
     }
 
     private Object[] extrasComponente(Componente c) {
-        if (c instanceof PlacaMadre placa) {
-            return new Object[]{placa.getRanurasMemoria(), placa.getIdsProcesadores()};
-        }
-        if (c instanceof Procesador cpu) {
-            return new Object[]{cpu.getGhz(), cpu.getCacheKb()};
-        }
-        if (c instanceof Memoria mem) {
-            return new Object[]{mem.getTecnologia(), mem.getTamanoGb() + " GB"};
-        }
-        if (c instanceof TarjetaRed red) {
-            return new Object[]{red.getVelocidadTransmision(), red.getMac()};
-        }
-        if (c instanceof DiscoDuro disco) {
-            return new Object[]{disco.getRpm(), disco.getCapacidadGb() + " " + disco.getTipoDisco()};
-        }
-        if (c instanceof Fuente fuente) {
-            return new Object[]{fuente.getWatts() + " W", ""};
-        }
-        return new Object[]{"", ""};
+        return switch (c.getTipo()) {
+            case "PLACA" -> {
+                PlacaMadre placa = (PlacaMadre) c;
+                yield new Object[]{placa.getRanurasMemoria(), placa.getIdsProcesadores()};
+            }
+            case "CPU" -> {
+                Procesador cpu = (Procesador) c;
+                yield new Object[]{cpu.getGhz(), cpu.getCacheKb()};
+            }
+            case "MEM" -> {
+                Memoria mem = (Memoria) c;
+                yield new Object[]{mem.getTecnologia(), mem.getTamanoGb() + " GB"};
+            }
+            case "RED" -> {
+                TarjetaRed red = (TarjetaRed) c;
+                yield new Object[]{red.getVelocidadTransmision(), red.getMac()};
+            }
+            case "DISCO" -> {
+                DiscoDuro disco = (DiscoDuro) c;
+                yield new Object[]{disco.getRpm(), disco.getCapacidadGb() + " " + disco.getTipoDisco()};
+            }
+            case "FUENTE" -> {
+                Fuente fuente = (Fuente) c;
+                yield new Object[]{fuente.getWatts() + " W", ""};
+            }
+            default -> new Object[]{"", ""};
+        };
     }
 
     private void refrescarTablaPCs() {
@@ -263,7 +271,8 @@ public class Menu extends javax.swing.JFrame {
         abrirDialogo(form, "Construir PC", 450, 480);
         if (form.isGuardado()) {
             try {
-                sistema.getAdminPCs().construir(form.getPCGuardada());
+                sistema.getAdminPCs().construir(form.getPCGuardada(),
+                        sistema.getAdminClientes(), sistema.getAdminComponentes());
                 persistir();
                 refrescarTablaPCs();
             } catch (IllegalArgumentException ex) {
@@ -311,7 +320,6 @@ public class Menu extends javax.swing.JFrame {
         }
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -687,17 +695,19 @@ public class Menu extends javax.swing.JFrame {
                 "id", "Nombre", "Apellido", "DNI", "Fecha de Nac", "Direccion", "Mail", "Cuil", "Nacionalidad"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            Class<?>[] types = new Class<?>[] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -795,17 +805,19 @@ public class Menu extends javax.swing.JFrame {
                 "id", "Nombre", "Apellido", "DNI", "Direccion", "Antiguedad", "Fecha de Nacimiento", "Legajo"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            Class<?>[] types = new Class<?>[] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -817,7 +829,6 @@ public class Menu extends javax.swing.JFrame {
             tablaEmpleados.getColumnModel().getColumn(2).setResizable(false);
             tablaEmpleados.getColumnModel().getColumn(3).setResizable(false);
             tablaEmpleados.getColumnModel().getColumn(4).setResizable(false);
-            tablaEmpleados.getColumnModel().getColumn(4).setHeaderValue("Cuil");
             tablaEmpleados.getColumnModel().getColumn(5).setResizable(false);
             tablaEmpleados.getColumnModel().getColumn(6).setResizable(false);
             tablaEmpleados.getColumnModel().getColumn(7).setResizable(false);
@@ -904,20 +915,22 @@ public class Menu extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Modelo", "Precio", "Descripcion", "Extra", "Extra", "Extra"
+                "id", "Tipo", "Modelo", "Precio", "Descripcion", "Extra 1", "Extra 2"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            Class<?>[] types = new Class<?>[] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -1030,17 +1043,19 @@ public class Menu extends javax.swing.JFrame {
                 "id", "idCliente", "Fecha armado", "Componentes"
             }
         ) {
-            Class[] types = new Class [] {
+            Class<?>[] types = new Class<?>[] {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }

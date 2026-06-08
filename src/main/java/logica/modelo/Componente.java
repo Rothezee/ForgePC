@@ -19,6 +19,10 @@ public abstract class Componente {
 
     public abstract String getTipo();
 
+    public boolean esUn(String tipo) {
+        return tipo != null && tipo.equals(getTipo());
+    }
+
     public int getId() {
         return id;
     }

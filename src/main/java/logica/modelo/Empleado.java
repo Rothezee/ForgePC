@@ -17,6 +17,10 @@ public abstract class Empleado extends Persona {
 
     public abstract String getTipo();
 
+    public boolean esUn(String tipo) {
+        return tipo != null && tipo.equals(getTipo());
+    }
+
     public int getAntiguedad() {
         return antiguedad;
     }

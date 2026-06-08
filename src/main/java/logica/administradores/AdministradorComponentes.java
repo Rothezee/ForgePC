@@ -14,11 +14,13 @@ import logica.modelo.Procesador;
 import logica.modelo.TarjetaRed;
 import persistencia.ControladorDeArchivo;
 
+/** Gestiona el ABM de componentes de PC y su persistencia en componentes.txt. */
 public class AdministradorComponentes {
 
     private final ArrayList<Componente> componentes = new ArrayList<>();
     private final ControladorDeArchivo archivo = new ControladorDeArchivo();
 
+    /** Agrega un componente nuevo; asigna id automático si viene en 0 o negativo. */
     public void alta(Componente componente) throws IdDuplicadoException {
         if (buscar(componente.getId()) != null) {
             throw new IdDuplicadoException("Ya existe un componente con id " + componente.getId());
@@ -29,6 +31,7 @@ public class AdministradorComponentes {
         componentes.add(componente);
     }
 
+    /** Reemplaza los datos de un componente existente según su id. */
     public void actualizar(Componente componente) throws RegistroNoEncontradoException {
         Componente existente = buscar(componente.getId());
         if (existente == null) {
@@ -37,14 +40,14 @@ public class AdministradorComponentes {
         componentes.set(componentes.indexOf(existente), componente);
     }
 
+    /** Quita de la lista el componente con el id indicado. */
     public void eliminarPorId(int id) throws RegistroNoEncontradoException {
-        Componente componente = buscar(id);
-        if (componente == null) {
+        if (!componentes.removeIf(c -> c.getId() == id)) {
             throw new RegistroNoEncontradoException("Componente no encontrado: " + id);
         }
-        componentes.remove(componente);
     }
 
+    /** Devuelve el componente con ese id, o null si no existe. */
     public Componente buscar(int id) {
         for (Componente componente : componentes) {
             if (componente.getId() == id) {
@@ -54,14 +57,17 @@ public class AdministradorComponentes {
         return null;
     }
 
+    /** Devuelve una copia de todos los componentes en el orden de carga. */
     public List<Componente> listarTodos() {
         return new ArrayList<>(componentes);
     }
 
+    /** Cantidad de componentes cargados en memoria. */
     public int cantidad() {
         return componentes.size();
     }
 
+    /** Calcula el próximo id libre (máximo existente + 1). */
     public int siguienteId() {
         int max = 0;
         for (Componente componente : componentes) {
@@ -72,6 +78,7 @@ public class AdministradorComponentes {
         return max + 1;
     }
 
+    /** Lee componentes.txt y reconstruye la lista en memoria según el tipo de cada línea. */
     public void cargar() throws PersistenciaException {
         componentes.clear();
         if (!archivo.existe(RutasDatos.COMPONENTES)) {
@@ -83,6 +90,7 @@ public class AdministradorComponentes {
         }
     }
 
+    /** Escribe todos los componentes de memoria al archivo componentes.txt. */
     public void guardar() throws PersistenciaException {
         ArrayList<String> lineas = new ArrayList<>();
         for (Componente componente : componentes) {
@@ -91,6 +99,7 @@ public class AdministradorComponentes {
         archivo.guardarLineas(RutasDatos.COMPONENTES, lineas);
     }
 
+    /** Convierte una línea del archivo en el subtipo de Componente que indica el campo tipo. */
     private Componente parsear(String linea) {
         String[] p = linea.split(";", -1);
         String tipo = p[0];
@@ -122,27 +131,36 @@ public class AdministradorComponentes {
         }
     }
 
+    /** Convierte un componente en una línea de texto, incluyendo campos propios de su subtipo. */
     private String serializar(Componente c) {
         String base = c.getTipo() + ";" + c.getId() + ";" + c.getModelo() + ";" + c.getPrecio() + ";"
                 + c.getDescripcion();
-        if (c instanceof PlacaMadre placa) {
-            return base + ";" + placa.getRanurasMemoria() + ";" + placa.getIdsProcesadores();
-        }
-        if (c instanceof Procesador cpu) {
-            return base + ";" + cpu.getGhz() + ";" + cpu.getCacheKb();
-        }
-        if (c instanceof Memoria mem) {
-            return base + ";" + mem.getTecnologia() + ";" + mem.getVelocidad() + ";" + mem.getTamanoGb();
-        }
-        if (c instanceof TarjetaRed red) {
-            return base + ";" + red.getVelocidadTransmision() + ";" + red.getMac();
-        }
-        if (c instanceof DiscoDuro disco) {
-            return base + ";" + disco.getRpm() + ";" + disco.getCapacidadGb() + ";" + disco.getTipoDisco();
-        }
-        if (c instanceof Fuente fuente) {
-            return base + ";" + fuente.getWatts();
-        }
-        return base;
+        return switch (c.getTipo()) {
+            case "PLACA" -> {
+                PlacaMadre placa = (PlacaMadre) c;
+                yield base + ";" + placa.getRanurasMemoria() + ";" + placa.getIdsProcesadores();
+            }
+            case "CPU" -> {
+                Procesador cpu = (Procesador) c;
+                yield base + ";" + cpu.getGhz() + ";" + cpu.getCacheKb();
+            }
+            case "MEM" -> {
+                Memoria mem = (Memoria) c;
+                yield base + ";" + mem.getTecnologia() + ";" + mem.getVelocidad() + ";" + mem.getTamanoGb();
+            }
+            case "RED" -> {
+                TarjetaRed red = (TarjetaRed) c;
+                yield base + ";" + red.getVelocidadTransmision() + ";" + red.getMac();
+            }
+            case "DISCO" -> {
+                DiscoDuro disco = (DiscoDuro) c;
+                yield base + ";" + disco.getRpm() + ";" + disco.getCapacidadGb() + ";" + disco.getTipoDisco();
+            }
+            case "FUENTE" -> {
+                Fuente fuente = (Fuente) c;
+                yield base + ";" + fuente.getWatts();
+            }
+            default -> base;
+        };
     }
 }

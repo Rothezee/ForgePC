@@ -16,7 +16,6 @@ public class FormComponentes extends javax.swing.JPanel {
 
     public FormComponentes() {
         initComponents();
-        cmbTipo.addActionListener(e -> sincronizarTabConTipo());
         sincronizarTabConTipo();
     }
 
@@ -41,31 +40,46 @@ public class FormComponentes extends javax.swing.JPanel {
         txtModelo.setText(c.getModelo());
         txtPrecio.setText(String.valueOf(c.getPrecio()));
         txtDescripcion.setText(c.getDescripcion());
-        if (c instanceof PlacaMadre placa) {
-            cmbTipo.setSelectedItem("Placa madre");
-            txtRanuras.setText(String.valueOf(placa.getRanurasMemoria()));
-            txtIdsCpu.setText(placa.getIdsProcesadores());
-        } else if (c instanceof Procesador cpu) {
-            cmbTipo.setSelectedItem("Procesador");
-            txtGhz.setText(String.valueOf(cpu.getGhz()));
-            txtCache.setText(String.valueOf(cpu.getCacheKb()));
-        } else if (c instanceof Memoria mem) {
-            cmbTipo.setSelectedItem("Memoria");
-            txtTecnologia.setText(mem.getTecnologia());
-            txtVelocidad.setText(String.valueOf(mem.getVelocidad()));
-            txtTamano.setText(String.valueOf(mem.getTamanoGb()));
-        } else if (c instanceof TarjetaRed red) {
-            cmbTipo.setSelectedItem("Tarjeta red");
-            txtVelTrans.setText(String.valueOf(red.getVelocidadTransmision()));
-            txtMac.setText(red.getMac());
-        } else if (c instanceof DiscoDuro disco) {
-            cmbTipo.setSelectedItem("Disco duro");
-            txtRpm.setText(String.valueOf(disco.getRpm()));
-            txtCapacidad.setText(String.valueOf(disco.getCapacidadGb()));
-            txtTipoDisco.setText(disco.getTipoDisco());
-        } else if (c instanceof Fuente fuente) {
-            cmbTipo.setSelectedItem("Fuente");
-            txtWatts.setText(String.valueOf(fuente.getWatts()));
+        switch (c.getTipo()) {
+            case "PLACA" -> {
+                PlacaMadre placa = (PlacaMadre) c;
+                cmbTipo.setSelectedItem("Placa madre");
+                txtRanuras.setText(String.valueOf(placa.getRanurasMemoria()));
+                txtIdsCpu.setText(placa.getIdsProcesadores());
+            }
+            case "CPU" -> {
+                Procesador cpu = (Procesador) c;
+                cmbTipo.setSelectedItem("Procesador");
+                txtGhz.setText(String.valueOf(cpu.getGhz()));
+                txtCache.setText(String.valueOf(cpu.getCacheKb()));
+            }
+            case "MEM" -> {
+                Memoria mem = (Memoria) c;
+                cmbTipo.setSelectedItem("Memoria");
+                txtTecnologia.setText(mem.getTecnologia());
+                txtVelocidad.setText(String.valueOf(mem.getVelocidad()));
+                txtTamano.setText(String.valueOf(mem.getTamanoGb()));
+            }
+            case "RED" -> {
+                TarjetaRed red = (TarjetaRed) c;
+                cmbTipo.setSelectedItem("Tarjeta red");
+                txtVelTrans.setText(String.valueOf(red.getVelocidadTransmision()));
+                txtMac.setText(red.getMac());
+            }
+            case "DISCO" -> {
+                DiscoDuro disco = (DiscoDuro) c;
+                cmbTipo.setSelectedItem("Disco duro");
+                txtRpm.setText(String.valueOf(disco.getRpm()));
+                txtCapacidad.setText(String.valueOf(disco.getCapacidadGb()));
+                txtTipoDisco.setText(disco.getTipoDisco());
+            }
+            case "FUENTE" -> {
+                Fuente fuente = (Fuente) c;
+                cmbTipo.setSelectedItem("Fuente");
+                txtWatts.setText(String.valueOf(fuente.getWatts()));
+            }
+            default -> {
+            }
         }
         sincronizarTabConTipo();
     }
@@ -114,7 +128,6 @@ public class FormComponentes extends javax.swing.JPanel {
         javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -367,7 +380,7 @@ public class FormComponentes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
-        // TODO add your handling code here:
+        sincronizarTabConTipo();
     }//GEN-LAST:event_cmbTipoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

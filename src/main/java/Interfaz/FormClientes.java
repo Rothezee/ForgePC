@@ -50,7 +50,6 @@ public class FormClientes extends javax.swing.JPanel {
                 (String) cmbNacionalidad.getSelectedItem());
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

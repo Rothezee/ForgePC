@@ -42,16 +42,25 @@ public class FormEmpleados extends javax.swing.JPanel {
         } catch (Exception ex) {
             spnFecha.setValue(new Date());
         }
-        if (empleado instanceof Administrativo a) {
-            cmbTipo.setSelectedItem("Administrativo");
-            txtExtra1.setText(a.getTarea());
-            txtExtra2.setText(a.getArea());
-        } else if (empleado instanceof Operario o) {
-            cmbTipo.setSelectedItem("Operario");
-            txtExtra1.setText(o.getSector());
-        } else if (empleado instanceof Gerencial g) {
-            cmbTipo.setSelectedItem("Gerencial");
-            txtExtra1.setText(g.getCargo());
+        switch (empleado.getTipo()) {
+            case "ADMIN" -> {
+                Administrativo a = (Administrativo) empleado;
+                cmbTipo.setSelectedItem("Administrativo");
+                txtExtra1.setText(a.getTarea());
+                txtExtra2.setText(a.getArea());
+            }
+            case "OPER" -> {
+                Operario o = (Operario) empleado;
+                cmbTipo.setSelectedItem("Operario");
+                txtExtra1.setText(o.getSector());
+            }
+            case "GEREN" -> {
+                Gerencial g = (Gerencial) empleado;
+                cmbTipo.setSelectedItem("Gerencial");
+                txtExtra1.setText(g.getCargo());
+            }
+            default -> {
+            }
         }
         actualizarExtras();
     }
@@ -99,7 +108,6 @@ public class FormEmpleados extends javax.swing.JPanel {
         javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

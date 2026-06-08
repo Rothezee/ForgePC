@@ -8,26 +8,42 @@ import java.util.stream.Collectors;
 import logica.modelo.PC;
 import persistencia.ControladorDeArchivo;
 
+/** Gestiona el registro de PCs armadas y su persistencia en pcs.txt. */
 public class AdministradorPCs {
 
     private final ArrayList<PC> pcs = new ArrayList<>();
     private final ControladorDeArchivo archivo = new ControladorDeArchivo();
 
-    public void construir(PC pc) {
+    /** Registra una PC armada; valida cliente y componentes; asigna id si viene en 0 o negativo. */
+    public void construir(PC pc, AdministradorClientes adminClientes, AdministradorComponentes adminComponentes) {
+        if (adminClientes.buscar(pc.getIdCliente()) == null) {
+            throw new IllegalArgumentException("Cliente no encontrado: " + pc.getIdCliente());
+        }
+        if (pc.getIdsComponentes() == null || pc.getIdsComponentes().isEmpty()) {
+            throw new IllegalArgumentException("Debe seleccionar al menos un componente.");
+        }
+        for (int idComp : pc.getIdsComponentes()) {
+            if (adminComponentes.buscar(idComp) == null) {
+                throw new IllegalArgumentException("Componente no encontrado: " + idComp);
+            }
+        }
         if (pc.getId() <= 0) {
             pc.setId(siguienteId());
         }
         pcs.add(pc);
     }
 
+    /** Devuelve una copia de todas las PCs registradas. */
     public List<PC> listar() {
         return new ArrayList<>(pcs);
     }
 
+    /** Cantidad de PCs cargadas en memoria. */
     public int cantidad() {
         return pcs.size();
     }
 
+    /** Calcula el próximo id libre (máximo existente + 1). */
     public int siguienteId() {
         int max = 0;
         for (PC pc : pcs) {
@@ -38,6 +54,7 @@ public class AdministradorPCs {
         return max + 1;
     }
 
+    /** Lee pcs.txt y reconstruye la lista de PCs en memoria. */
     public void cargar() throws PersistenciaException {
         pcs.clear();
         if (!archivo.existe(RutasDatos.PCS)) {
@@ -49,6 +66,7 @@ public class AdministradorPCs {
         }
     }
 
+    /** Escribe todas las PCs de memoria al archivo pcs.txt. */
     public void guardar() throws PersistenciaException {
         ArrayList<String> lineas = new ArrayList<>();
         for (PC pc : pcs) {
@@ -57,6 +75,7 @@ public class AdministradorPCs {
         archivo.guardarLineas(RutasDatos.PCS, lineas);
     }
 
+    /** Convierte una línea del archivo en un objeto PC con sus ids de componentes. */
     private PC parsear(String linea) {
         String[] p = linea.split(";", -1);
         PC pc = new PC();
@@ -74,6 +93,7 @@ public class AdministradorPCs {
         return pc;
     }
 
+    /** Convierte una PC en una línea de texto con ids de componentes separados por coma. */
     private String serializar(PC pc) {
         String ids = pc.getIdsComponentes().stream()
                 .map(String::valueOf)

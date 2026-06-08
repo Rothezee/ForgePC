@@ -2,6 +2,7 @@ package logica.administradores;
 
 import excepciones.PersistenciaException;
 
+/** Punto de acceso único (singleton) que agrupa todos los administradores del sistema. */
 public class SistemaForge {
 
     private static SistemaForge instancia;
@@ -14,6 +15,7 @@ public class SistemaForge {
     private SistemaForge() {
     }
 
+    /** Devuelve la única instancia del sistema, creándola la primera vez que se invoca. */
     public static SistemaForge getInstancia() {
         if (instancia == null) {
             instancia = new SistemaForge();
@@ -21,6 +23,7 @@ public class SistemaForge {
         return instancia;
     }
 
+    /** Carga en memoria clientes, empleados, componentes y PCs desde sus archivos .txt. */
     public void cargarTodo() throws PersistenciaException {
         adminClientes.cargar();
         adminEmpleados.cargar();
@@ -28,6 +31,7 @@ public class SistemaForge {
         adminPCs.cargar();
     }
 
+    /** Persiste en disco todos los datos que están en memoria. */
     public void guardarTodo() throws PersistenciaException {
         adminClientes.guardar();
         adminEmpleados.guardar();
@@ -35,18 +39,22 @@ public class SistemaForge {
         adminPCs.guardar();
     }
 
+    /** Acceso al administrador de clientes. */
     public AdministradorClientes getAdminClientes() {
         return adminClientes;
     }
 
+    /** Acceso al administrador de empleados. */
     public AdministradorEmpleados getAdminEmpleados() {
         return adminEmpleados;
     }
 
+    /** Acceso al administrador de componentes. */
     public AdministradorComponentes getAdminComponentes() {
         return adminComponentes;
     }
 
+    /** Acceso al administrador de PCs armadas. */
     public AdministradorPCs getAdminPCs() {
         return adminPCs;
     }
