@@ -48,7 +48,7 @@ public class ControladorDeArchivo {
             throw new PersistenciaException("Error al leer archivo: " + ruta, e);
         }
         return lineas;
-    }
+    } //leo las lineas del archivo y las devuelvo en una lista
 
     public void guardarLineas(String ruta, List<String> lineas) throws PersistenciaException {
         File archivo = new File(ruta);
@@ -64,5 +64,5 @@ public class ControladorDeArchivo {
         } catch (IOException e) {
             throw new PersistenciaException("Error al guardar archivo: " + ruta, e);
         }
-    }
+    } 
 }

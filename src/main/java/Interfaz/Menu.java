@@ -34,13 +34,11 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         if (!java.beans.Beans.isDesignTime()) {
-            aplicarEstilosCards();
             try {
                 sistema.cargarTodo();
             } catch (PersistenciaException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Carga de datos", JOptionPane.WARNING_MESSAGE);
             }
-            estiloCeldasTablas();
             refrescarContadoresInicio();
             refrescarTablaClientes();
             refrescarTablaEmpleados();
@@ -60,27 +58,6 @@ public class Menu extends javax.swing.JFrame {
     private void irAComponentes() {
         mostrarPanel("componentes");
         refrescarTablaComponentes();
-        estiloTabla(tablaComponentes, scrollComponentes);
-        cardComponentes.revalidate();
-        cardComponentes.repaint();
-    }
-
-    /** Colores de tablas/cards sin reemplazar el layout del designer. */
-    private void aplicarEstilosCards() {
-        lblComponentesTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblPCsTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        sepComponentes.setBackground(new java.awt.Color(70, 70, 70));
-        sepComponentes.setForeground(new java.awt.Color(70, 70, 70));
-        sepPCs.setBackground(new java.awt.Color(70, 70, 70));
-        sepPCs.setForeground(new java.awt.Color(70, 70, 70));
-        scrollComponentes.setBackground(new java.awt.Color(30, 30, 30));
-        scrollPCs.setBackground(new java.awt.Color(30, 30, 30));
-        tablaComponentes.setBackground(new java.awt.Color(30, 30, 30));
-        tablaComponentes.setForeground(new java.awt.Color(255, 255, 255));
-        tablaComponentes.setSelectionForeground(java.awt.Color.WHITE);
-        tablaPCs.setBackground(new java.awt.Color(30, 30, 30));
-        tablaPCs.setForeground(new java.awt.Color(255, 255, 255));
-        tablaPCs.setSelectionForeground(java.awt.Color.WHITE);
     }
 
     private void persistir() {
@@ -182,7 +159,7 @@ public class Menu extends javax.swing.JFrame {
         return (Integer) tabla.getValueAt(fila, 0);
     }
 
-    private void abrirDialogo(javax.swing.JPanel form, String titulo, int ancho, int alto) {
+    private void abrirDialogo(javax.swing.JPanel form, String titulo, int ancho, int alto) { //la idea era mostrar un titulo diferente segun la operacion. 
         JDialog dialog = new JDialog(this, titulo, true);
         dialog.getContentPane().add(form);
         dialog.pack();
@@ -278,45 +255,6 @@ public class Menu extends javax.swing.JFrame {
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
-    }
-
-    private void estiloCeldasTablas() {
-        if (java.beans.Beans.isDesignTime()) {
-            return;
-        }
-        estiloTabla(tablaClientes, scrollClientes);
-        estiloTabla(tablaEmpleados, scrollEmpleados);
-        estiloTabla(tablaComponentes, scrollComponentes);
-        estiloTabla(tablaPCs, scrollPCs);
-        javax.swing.JButton[] botonesMenu = {btnInicio, btnClientes1, btnEmpleados, btnComponentes, btnPCs, btnSalir,
-            btnAccClientes, btnAccEmpleados, btnAccComponentes, btnAccSalir};
-        for (javax.swing.JButton boton : botonesMenu) {
-            if (boton != null) {
-                boton.setUI(new javax.swing.plaf.basic.BasicButtonUI());
-            }
-        }
-    }
-
-    private void estiloTabla(javax.swing.JTable tabla, javax.swing.JScrollPane scroll) {
-        java.awt.Color fondo = new java.awt.Color(30, 30, 30);
-        java.awt.Color texto = java.awt.Color.WHITE;
-        java.awt.Color seleccion = new java.awt.Color(110, 110, 110);
-        tabla.setGridColor(new java.awt.Color(70, 70, 70));
-        tabla.setSelectionBackground(seleccion);
-        tabla.setSelectionForeground(texto);
-        scroll.getViewport().setBackground(fondo);
-        scroll.getViewport().setOpaque(true);
-        javax.swing.table.JTableHeader header = tabla.getTableHeader();
-        header.setBackground(new java.awt.Color(50, 50, 50));
-        header.setForeground(texto);
-        header.setOpaque(true);
-        javax.swing.table.DefaultTableCellRenderer renderer = new javax.swing.table.DefaultTableCellRenderer();
-        renderer.setBackground(fondo);
-        renderer.setForeground(texto);
-        renderer.setOpaque(true);
-        for (int i = 0; i < tabla.getColumnCount(); i++) {
-            tabla.getColumnModel().getColumn(i).setCellRenderer(renderer);
         }
     }
 
@@ -680,10 +618,7 @@ public class Menu extends javax.swing.JFrame {
         sepClientes.setBackground(new java.awt.Color(70, 70, 70));
         sepClientes.setForeground(new java.awt.Color(70, 70, 70));
 
-        scrollClientes.setBackground(new java.awt.Color(30, 30, 30));
-
-        tablaClientes.setBackground(new java.awt.Color(30, 30, 30));
-        tablaClientes.setForeground(new java.awt.Color(255, 255, 255));
+        tablaClientes.setForeground(new java.awt.Color(0, 0, 0));
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -702,12 +637,10 @@ public class Menu extends javax.swing.JFrame {
                 false, false, false, false, false, false, false, false, false
             };
 
-            @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -812,12 +745,10 @@ public class Menu extends javax.swing.JFrame {
                 false, false, false, false, false, false, false, false
             };
 
-            @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -925,12 +856,10 @@ public class Menu extends javax.swing.JFrame {
                 false, false, false, false, false, false, false
             };
 
-            @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -971,6 +900,7 @@ public class Menu extends javax.swing.JFrame {
         sepComponentes.setBackground(new java.awt.Color(80, 80, 80));
 
         lblComponentesTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblComponentesTitulo.setForeground(new java.awt.Color(255, 255, 255));
         lblComponentesTitulo.setText("Componentes");
 
         javax.swing.GroupLayout cardComponentesLayout = new javax.swing.GroupLayout(cardComponentes);
@@ -1050,12 +980,10 @@ public class Menu extends javax.swing.JFrame {
                 false, false, false, false
             };
 
-            @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -1124,7 +1052,6 @@ public class Menu extends javax.swing.JFrame {
     private void btnPCsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPCsActionPerformed
         mostrarPanel("pcs");
         refrescarTablaPCs();
-        estiloTabla(tablaPCs, scrollPCs);
     }//GEN-LAST:event_btnPCsActionPerformed
 
     private void btnConstruirPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConstruirPCActionPerformed

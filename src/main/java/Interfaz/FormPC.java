@@ -131,13 +131,19 @@ public class FormPC extends javax.swing.JPanel {
 
         add(scrollComponentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 390, 200));
 
+        btnGuardar.setBackground(new java.awt.Color(0, 204, 51));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(0, 0, 0));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
-        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 100, 32));
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 110, 40));
 
+        btnCancelar.setBackground(new java.awt.Color(204, 51, 0));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 100, 32));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 110, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
