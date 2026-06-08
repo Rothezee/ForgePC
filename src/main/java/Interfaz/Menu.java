@@ -11,10 +11,13 @@ import excepciones.RegistroNoEncontradoException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logica.modelo.Administrativo;
 import logica.modelo.Cliente;
 import logica.modelo.Componente;
 import logica.modelo.DiscoDuro;
 import logica.modelo.Empleado;
+import logica.modelo.Gerencial;
+import logica.modelo.Operario;
 import logica.modelo.Fuente;
 import logica.modelo.Memoria;
 import logica.modelo.PC;
@@ -93,12 +96,45 @@ public class Menu extends javax.swing.JFrame {
     private void refrescarTablaEmpleados() {
         limpiarTabla(tablaEmpleados);
         DefaultTableModel modelo = (DefaultTableModel) tablaEmpleados.getModel();
+        modelo.setColumnIdentifiers(new String[]{
+            "id", "Nombre", "Apellido", "DNI", "Direccion", "Antiguedad", "Fecha de Nacimiento", "Legajo",
+            "Tipo", "Cargo", "Area"
+        });
         for (Empleado e : sistema.getAdminEmpleados().listarTodos()) {
+            Object[] extras = extrasEmpleado(e);
             modelo.addRow(new Object[]{
                 e.getId(), e.getNombre(), e.getApellido(), e.getDni(), e.getDireccion(),
-                e.getAntiguedad(), e.getFechaNacimiento(), e.getLegajo()
+                e.getAntiguedad(), e.getFechaNacimiento(), e.getLegajo(),
+                tipoEmpleado(e), extras[0], extras[1]
             });
         }
+    }
+
+    private String tipoEmpleado(Empleado e) {
+        return switch (e.getTipo()) {
+            case "ADMIN" -> "Administrativo";
+            case "OPER" -> "Operario";
+            case "GEREN" -> "Gerencial";
+            default -> e.getTipo();
+        };
+    }
+
+    private Object[] extrasEmpleado(Empleado e) {
+        return switch (e.getTipo()) {
+            case "ADMIN" -> {
+                Administrativo a = (Administrativo) e;
+                yield new Object[]{a.getTarea(), a.getArea()};
+            }
+            case "OPER" -> {
+                Operario o = (Operario) e;
+                yield new Object[]{o.getSector(), ""};
+            }
+            case "GEREN" -> {
+                Gerencial g = (Gerencial) e;
+                yield new Object[]{g.getCargo(), ""};
+            }
+            default -> new Object[]{"", ""};
+        };
     }
 
     private void refrescarTablaComponentes() {
@@ -729,26 +765,28 @@ public class Menu extends javax.swing.JFrame {
 
         tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Nombre", "Apellido", "DNI", "Direccion", "Antiguedad", "Fecha de Nacimiento", "Legajo"
+                "id", "Nombre", "Apellido", "DNI", "Direccion", "Antiguedad", "Fecha de Nacimiento", "Legajo", "Tipo", "Cargo", "Area"
             }
         ) {
             Class<?>[] types = new Class<?>[] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
+            @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -763,6 +801,9 @@ public class Menu extends javax.swing.JFrame {
             tablaEmpleados.getColumnModel().getColumn(5).setResizable(false);
             tablaEmpleados.getColumnModel().getColumn(6).setResizable(false);
             tablaEmpleados.getColumnModel().getColumn(7).setResizable(false);
+            tablaEmpleados.getColumnModel().getColumn(8).setResizable(false);
+            tablaEmpleados.getColumnModel().getColumn(9).setResizable(false);
+            tablaEmpleados.getColumnModel().getColumn(10).setResizable(false);
         }
 
         sepEmpleados.setBackground(new java.awt.Color(80, 80, 80));
